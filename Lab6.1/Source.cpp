@@ -7,13 +7,10 @@ int main(int argc, char **argv)
 	double begin, end, time = 0.0, ftime = 0.0;
 	/*инициализация библиотеки  */
 	MPI_Init(&argc, &argv);
-	
 	/*определение количества задач в приложении  */
 	MPI_Comm_size(MPI_COMM_WORLD, &size);
-
 	/* определение собственного номера от 0 до (size-1) */
 	MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-	
 	begin = MPI_Wtime();
 	/* задача с номером 0 сообщает пользователю размер группы,
 	* к которой прикреплен коммуникатор MPI_COMM_WORLD,
@@ -30,6 +27,5 @@ int main(int argc, char **argv)
 	time += end - begin;
 	MPI_Reduce(&time, &ftime, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
 	MPI_Finalize();
-	
 	return 0;
 }

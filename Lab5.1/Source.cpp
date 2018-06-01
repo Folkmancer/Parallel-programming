@@ -15,16 +15,10 @@ int main(int argc, char **argv)
 	MPI_Comm_size(MPI_COMM_WORLD, &size);
 	/* определение собственного номера от 0 до (size-1) */
 	MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-
 	/* задача с номером 0 сообщает пользователю размер группы,
 	* к которой прикреплен коммуникатор MPI_COMM_WORLD,
 	* т.е. число процессов в приложении!!
 	*/
-	
-	//if (rank == 0) printf("Total processes count = %d\n", size);
-
-	/*каждая задача выводит пользователю свой номер */
-	//printf("Hello! My rank in MPI_COMM_WORLD = %d\n", rank);
 	printf("Hello, world! I am %d process from %d processes!", rank, size);
 	/*Все задачи завершают выполнение*/
 	MPI_Finalize();
