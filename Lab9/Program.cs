@@ -15,6 +15,7 @@ namespace Lab9
             Test('A');
             Test('B');
             Test('С');
+            Test('D');
             End = DateTime.Now;
             Console.WriteLine(End - Start);
 
@@ -24,12 +25,15 @@ namespace Lab9
             Thread firstLambda = new Thread(() => Test('A'));
             Thread secondLambda = new Thread(() => Test('B'));
             Thread thirdLambda = new Thread(() => Test('C'));
+            Thread fourthLambda = new Thread(() => Test('D'));
             firstLambda.Start();
             secondLambda.Start();
             thirdLambda.Start();
+            fourthLambda.Start();
             firstLambda.Join();
             secondLambda.Join();
             thirdLambda.Join();
+            fourthLambda.Join();
             End = DateTime.Now;
             Console.WriteLine(End - Start);
 
@@ -39,12 +43,15 @@ namespace Lab9
             Thread firstStatic = new Thread(Test);
             Thread secondStatic = new Thread(Test);
             Thread thirdStatic = new Thread(Test);
+            Thread fourthStatic = new Thread(Test);
             firstStatic.Start('A');
             secondStatic.Start('B');
             thirdStatic.Start('C');
+            fourthStatic.Start('D');
             firstStatic.Join();
             secondStatic.Join();
             thirdStatic.Join();
+            fourthStatic.Join();
             End = DateTime.Now;
             Console.WriteLine(End - Start);
 
@@ -54,8 +61,9 @@ namespace Lab9
             Task firstTask = Task.Run(() => Test('A'));
             Task secondTask = Task.Run(() => Test('B'));
             Task thirdTask = Task.Run(() => Test('C'));
+            Task fourthTask = Task.Run(() => Test('D'));
             //firstTask.Wait();
-            Task.WaitAll(firstTask, secondTask, thirdTask);
+            Task.WaitAll(firstTask, secondTask, thirdTask, fourthTask);
             End = DateTime.Now;
             Console.WriteLine(End - Start);
 
