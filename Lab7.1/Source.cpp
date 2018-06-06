@@ -21,11 +21,12 @@ int main(int argc, char **argv)
 	};
 
 	MPI_Init(&argc,&argv);
-	MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 	MPI_Comm_size(MPI_COMM_WORLD, &size);
+	MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+	
 
 	if (size == N) {
-		MPI_Scatter(sendbuf, sendcount, MPI_FLOAT, recvbufScatter, recvcount,
+		/*MPI_Scatter(sendbuf, sendcount, MPI_FLOAT, recvbufScatter, recvcount,
 			MPI_FLOAT, source, MPI_COMM_WORLD);
 
 		printf("rank= %d  Results: %f %f %f %f\n", 
@@ -34,15 +35,15 @@ int main(int argc, char **argv)
 			recvbufScatter[1],
 			recvbufScatter[2], 
 			recvbufScatter[3]
-		);
+		);*/
 
 		recvbufGather = (float *)malloc(size * N * sizeof(float));
 		MPI_Gather(sendbuf[rank], N, MPI_FLOAT, recvbufGather, recvcount, MPI_FLOAT, root, MPI_COMM_WORLD);
-		if (rank == root) {
+		/*if (rank == root) {
 			for (int i = 0; i < size * N; i++) {
 				printf("rank= %d line = %d Results: %f\n", rank, i, recvbufGather[i]);
 			}
-		}
+		}*/
 		
 		sendbufBcast = new float[6];
 		for (int i = 0; i < 6; i++) {
